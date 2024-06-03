@@ -22,7 +22,7 @@ export async function onRequest(context) {
           body: buffer
         });
         */
-        const answer = await context.env.AI.run('@cf/openai/whisper', input);
+        const response = await context.env.AI.run('@cf/openai/whisper', input);
   
           return Response.json({ input: { audio: [] }, response });
          // return Response.json({input:"kk"})
