@@ -28,16 +28,25 @@
     canvas {
       display: none;
     }
+    #response {
+      margin-top: 20px;
+      width: 80%;
+      text-align: center;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background-color: #f9f9f9;
+    }
   </style>
 </head>
 <body>
   <h1>Upload your video</h1>
-  <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+  <form id="uploadForm" enctype="multipart/form-data">
     <input type="file" id="videoFile" name="video" accept="video/*" required />
     <button type="submit">Upload</button>
   </form>
   <div id="preview">Video preview will appear here</div>
   <canvas id="videoCanvas"></canvas>
+  <div id="response"></div>
 
   <script>
     document.getElementById('videoFile').addEventListener('change', function(event) {
@@ -64,6 +73,24 @@
           URL.revokeObjectURL(video.src);
           video.remove();
         });
+      }
+    });
+
+    document.getElementById('uploadForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      const responseDiv = document.getElementById('response');
+
+      try {
+        const response = await fetch('/upload', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+        responseDiv.textContent = result.text || JSON.stringify(result);
+      } catch (error) {
+        responseDiv.textContent = 'Error uploading video: ' + error.message;
       }
     });
   </script>
