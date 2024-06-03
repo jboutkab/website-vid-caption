@@ -1,5 +1,7 @@
 // functions/upload.js
 export async function onRequest(context) {
+  const contextDetails = JSON.stringify(context, null, 2);
+  console.log(contextDetails)
     const { request } = context;
        const formData = await request.formData();
       const file = formData.get('video');
