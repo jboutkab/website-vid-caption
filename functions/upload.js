@@ -12,16 +12,6 @@ export async function onRequest(context) {
               audio:[...new Uint8Array(blob)]
           }
   
-        /*Save the file or pass it to Workers AI
-        const result = await fetch('https://<workers-ai-endpoint>/caption', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/octet-stream',
-            'Content-Length': buffer.length
-          },
-          body: buffer
-        });
-        */
         const response = await context.env.AI.run('@cf/openai/whisper', input);
   
         //return Response.json({ input: { audio: [] }, response });
