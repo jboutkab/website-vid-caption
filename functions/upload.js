@@ -20,10 +20,10 @@ export async function onRequest(context) {
           body: buffer
         });
         */
-        //const answer = await env.AI.run('@cf/openai/whisper', input);
+        const answer = await env.AI.run('@cf/openai/whisper', input);
   
-          //return Response.json({ input: { audio: [] }, response });
-          return Response.json({input:"kk"})
+          return Response.json({ input: { audio: [] }, response });
+         // return Response.json({input:"kk"})
       } else {
         return new Response('No video file uploaded', { status: 400 });
       }
