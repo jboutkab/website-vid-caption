@@ -1,6 +1,6 @@
 // functions/upload.js
 export async function onRequest(context) {
-    const { request,env } = context;
+    const { request } = context;
        const formData = await request.formData();
       const file = formData.get('video');
   
@@ -20,7 +20,7 @@ export async function onRequest(context) {
           body: buffer
         });
         */
-        const answer = await env.AI.run('@cf/openai/whisper', input);
+        const answer = await context.env.AI.run('@cf/openai/whisper', input);
   
           return Response.json({ input: { audio: [] }, response });
          // return Response.json({input:"kk"})
