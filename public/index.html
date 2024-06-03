@@ -159,13 +159,10 @@
 
         responseDiv.textContent = result.text || JSON.stringify(result);
       } catch (error) {
+        progressBar.style.width = '100%';
+        progressBar.style.backgroundColor = '#dc3545';
+        progressBar.textContent = 'Error';
         responseDiv.textContent = 'Error uploading video: ' + error.message;
-      } finally {
-        // Hide the progress bar after completion
-        setTimeout(() => {
-          progressBar.style.width = '0';
-          progressBar.textContent = '';
-        }, 3000);
       }
     });
   </script>
